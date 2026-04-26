@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CloudCog, Workflow, Database } from "lucide-react";
+import { CloudCog, Workflow, Globe } from "lucide-react";
 
 import TiltCard from "./TiltCard";
 
@@ -17,9 +17,9 @@ const services = [
         icon: Workflow,
     },
     {
-        title: "Digital Infrastructure Engineering",
-        description: "Robust backend architecture, APIs, cloud infrastructure, and scalable data systems engineered for performance, security, and long-term reliability.",
-        icon: Database,
+        title: "Website Design & Engineering",
+        description: "Engineered for clarity, speed, and visibility — transforming your digital presence into a structured, high-performance asset.",
+        icon: Globe,
     },
 ];
 
