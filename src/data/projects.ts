@@ -4,6 +4,7 @@ export interface Project {
     name: string;
     slug: string;
     category: ProjectCategory;
+    href?: string;
     type: string;
     description: string;
     stack: string[];
@@ -89,6 +90,66 @@ export const projects: Project[] = [
         color: "bg-purple-500/20",
         year: "2025",
         status: "In Development",
+    },
+    {
+        name: "NightSwitch",
+        slug: "nightswitch",
+        category: "website",
+        href: "https://night-switch.vercel.app/",
+        type: "Automated Lead-Capture Tool",
+        description: "NightSwitch is an automated lead-capture tool that catches, qualifies, and books after-hours enquiries while you sleep.",
+        stack: ["React", "TypeScript", "Tailwind CSS"],
+        color: "bg-brand-blue/20",
+        year: "2024",
+        status: "Live",
+    },
+    {
+        name: "Luma Atelier",
+        slug: "luma-atelier",
+        category: "website",
+        href: "https://luma-atelier.vercel.app/",
+        type: "Soft Luxury Wellness Studio",
+        description: "A soft luxury wellness studio with integrated treatment booking and memberships.",
+        stack: ["Next.js", "Tailwind CSS", "Framer Motion"],
+        color: "bg-rose-500/20",
+        year: "2025",
+        status: "Live",
+    },
+    {
+        name: "Ember No. 18",
+        slug: "ember-no-18",
+        category: "website",
+        href: "https://ember-number18.vercel.app/",
+        type: "Open-fire Restaurant",
+        description: "An open-fire restaurant in Umhlanga specializing in fire-led dining, private events, and direct collections.",
+        stack: ["Next.js", "Tailwind CSS", "Sanity"],
+        color: "bg-orange-600/20",
+        year: "2025",
+        status: "Live",
+    },
+    {
+        name: "BoltWork",
+        slug: "boltwork",
+        category: "website",
+        href: "https://bolt-works.vercel.app/",
+        type: "Field-Service Platform",
+        description: "Durban-based field-service platform providing emergency electrical, plumbing, and solar repairs with instant estimates, dispatch tracking, and clear, upfront pricing.",
+        stack: ["React", "Node.js", "PostgreSQL"],
+        color: "bg-yellow-500/20",
+        year: "2025",
+        status: "Live",
+    },
+    {
+        name: "Kanso House",
+        slug: "kanso-house",
+        category: "website",
+        href: "https://kanso-house.vercel.app/",
+        type: "Premium Furniture eCommerce",
+        description: "Kanso House provides minimalist, premium furniture alongside expert room styling and white-glove delivery across South Africa.",
+        stack: ["Next.js", "Shopify", "Tailwind CSS"],
+        color: "bg-neutral-500/20",
+        year: "2025",
+        status: "Live",
     },
 ];
 

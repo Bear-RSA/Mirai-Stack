@@ -20,10 +20,15 @@ const filterTabs: { key: FilterOption; label: string }[] = [
 export default function ProjectsPageClient() {
     const [activeFilter, setActiveFilter] = useState<FilterOption>("all");
 
-    const filtered =
+    const filtered = (
         activeFilter === "all"
             ? projects
-            : projects.filter((p) => p.category === activeFilter);
+            : projects.filter((p) => p.category === activeFilter)
+    ).sort((a, b) => {
+        if (a.status === "Live" && b.status !== "Live") return -1;
+        if (a.status !== "Live" && b.status === "Live") return 1;
+        return 0;
+    });
 
     return (
         <main className="min-h-screen bg-brand-dark text-white">
@@ -132,7 +137,9 @@ export default function ProjectsPageClient() {
                                         }`}
                                     >
                                         <Link
-                                            href={`/projects/${project.slug}`}
+                                            href={project.href || `/projects/${project.slug}`}
+                                            target={project.href ? "_blank" : undefined}
+                                            rel={project.href ? "noopener noreferrer" : undefined}
                                             className="flex flex-col h-full"
                                         >
                                             <TiltCard className="group relative flex flex-col justify-between p-10 h-full w-full rounded-[2rem] bg-brand-surface border border-brand-border hover:border-brand-blue/40 overflow-hidden transition-colors duration-500">
@@ -155,8 +162,9 @@ export default function ProjectsPageClient() {
 
                                                     {/* Title row */}
                                                     <div className="flex items-start justify-between mb-2 gap-4">
-                                                        <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                                                        <h3 className="text-2xl md:text-3xl font-semibold tracking-tight flex items-center gap-2">
                                                             {project.name}
+                                                            {project.href && <ArrowUpRight size={20} className="text-neutral-500 group-hover:text-brand-cyan transition-colors" />}
                                                         </h3>
                                                         <div className="w-12 h-12 rounded-full bg-brand-surface-2 border border-brand-border flex items-center justify-center text-neutral-400 group-hover:bg-brand-cyan group-hover:text-brand-dark group-hover:border-brand-cyan transition-all duration-500 group-hover:rotate-45 shrink-0 mt-1">
                                                             <ArrowUpRight size={22} />

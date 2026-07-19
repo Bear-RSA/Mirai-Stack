@@ -7,10 +7,7 @@ import Link from "next/link";
 import { projects, categoryLabels } from "@/data/projects";
 import TiltCard from "./TiltCard";
 
-const featuredProjects = [
-    ...projects.filter((p) => p.category === "saas").slice(0, 2),
-    ...projects.filter((p) => p.category === "website").slice(0, 2),
-];
+const featuredProjects = projects.filter((p) => p.status === "Live").slice(0, 2);
 
 export default function Projects() {
     return (
@@ -43,7 +40,12 @@ export default function Projects() {
                             style={{ perspective: 1000 }}
                             className="flex flex-col h-full"
                         >
-                            <Link href={`/projects/${project.slug}`} className="flex flex-col h-full">
+                            <Link 
+                                href={project.href || `/projects/${project.slug}`} 
+                                target={project.href ? "_blank" : undefined}
+                                rel={project.href ? "noopener noreferrer" : undefined}
+                                className="flex flex-col h-full"
+                            >
                                 <TiltCard
                                     className="group relative flex flex-col justify-between p-10 h-full w-full rounded-[2.5rem] bg-brand-surface border border-brand-border hover:border-brand-blue/50 overflow-hidden shadow-2xl shadow-black/60 hover:shadow-brand-blue/20 transition-colors"
                                 >
@@ -56,7 +58,10 @@ export default function Projects() {
                                             </span>
                                         </div>
                                         <div className="flex items-center justify-between mb-2 flex-wrap gap-4">
-                                            <h3 className="text-3xl font-semibold tracking-tight">{project.name}</h3>
+                                            <h3 className="text-3xl font-semibold tracking-tight flex items-center gap-2">
+                                                {project.name}
+                                                {project.href && <ArrowUpRight size={20} className="text-neutral-500 group-hover:text-brand-cyan transition-colors" />}
+                                            </h3>
                                             <div
                                                 className="w-14 h-14 rounded-full bg-brand-surface-2 border border-brand-border flex items-center justify-center text-neutral-400 group-hover:bg-brand-cyan group-hover:text-brand-dark group-hover:border-brand-cyan transition-all duration-500 group-hover:rotate-45 shadow-sm shrink-0"
                                             >
