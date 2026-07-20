@@ -25,7 +25,7 @@ export default function Footer() {
                         <Link href="/" className="flex items-center gap-3 group mb-6">
                             <div className="h-8 relative flex items-center justify-center rounded-md overflow-hidden border border-brand-cyan/20">
                                 <Image
-                                    src="/logo.jpg"
+                                    src="/bimi-logo.svg"
                                     alt="Mirai Stack Logo"
                                     width={120}
                                     height={32}
