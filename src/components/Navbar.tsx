@@ -33,10 +33,10 @@ export default function Navbar() {
                 : "bg-transparent"
                 }`}
         >
-            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
                 <TiltCard className="perspective-[800px] shrink-0 inline-block">
-                    <Link href="/" className="text-xl font-bold tracking-tight text-white flex items-center gap-3 group w-full h-full">
-                        <div className="h-8 relative flex items-center justify-center rounded-md overflow-hidden border border-brand-cyan/20 shadow-[0_0_15px_rgba(68,207,213,0.3)] group-hover:shadow-[0_0_25px_rgba(68,207,213,0.5)] transition-shadow">
+                    <Link href="/" className="text-base sm:text-xl font-bold tracking-tight text-white flex items-center gap-2 sm:gap-3 group w-full h-full min-w-0">
+                        <div className="h-7 sm:h-8 relative flex items-center justify-center rounded-md overflow-hidden border border-brand-cyan/20 shadow-[0_0_15px_rgba(68,207,213,0.3)] group-hover:shadow-[0_0_25px_rgba(68,207,213,0.5)] transition-shadow shrink-0">
                             <Image
                                 src="/logo.jpg"
                                 alt="Mirai Stack Logo"
@@ -46,7 +46,7 @@ export default function Navbar() {
                                 priority
                             />
                         </div>
-                        Mirai Stack
+                        <span className="truncate">Mirai Stack</span>
                     </Link>
                 </TiltCard>
 
@@ -73,8 +73,9 @@ export default function Navbar() {
 
                 {/* Mobile Menu Toggle */}
                 <button
-                    className="md:hidden p-2 -mr-2 text-neutral-400"
+                    className="md:hidden p-2.5 -mr-2 text-neutral-400 hover:text-white transition-colors rounded-xl hover:bg-brand-surface/50 min-w-[44px] min-h-[44px] flex items-center justify-center"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                 >
                     {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -87,13 +88,13 @@ export default function Navbar() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="md:hidden bg-brand-surface border-b border-brand-border px-6 py-6 flex flex-col gap-6 shadow-2xl absolute w-full"
+                        className="md:hidden bg-brand-surface/95 backdrop-blur-xl border-b border-brand-border px-5 py-5 flex flex-col gap-1 shadow-2xl absolute w-full"
                     >
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-base font-medium text-neutral-300 hover:text-white transition-colors"
+                                className="text-base font-medium text-neutral-300 hover:text-white hover:bg-brand-surface-2/50 transition-colors px-4 py-3 rounded-xl"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 {link.name}
@@ -102,7 +103,7 @@ export default function Navbar() {
                         <Link
                             href="/#contact"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="mt-2 w-full text-center px-4 py-4 text-base font-medium bg-brand-cyan text-brand-dark rounded-xl hover:bg-white transition-all"
+                            className="mt-3 w-full text-center px-4 py-3.5 text-base font-semibold bg-brand-cyan text-brand-dark rounded-xl hover:bg-white transition-all"
                         >
                             Contact
                         </Link>

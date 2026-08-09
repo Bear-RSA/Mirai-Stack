@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
     return (
-        <section id="about" className="py-32 px-6 bg-brand-dark text-white selection:bg-brand-cyan selection:text-brand-dark relative overflow-hidden">
+        <section id="about" className="py-20 sm:py-32 px-4 sm:px-6 bg-brand-dark text-white selection:bg-brand-cyan selection:text-brand-dark relative overflow-hidden">
 
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-full h-full bg-grid opacity-20 pointer-events-none" />
@@ -20,7 +20,7 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-12 text-balance"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-8 sm:mb-12 text-balance"
                 >
                     Mirai Stack is a software engineering studio focused on building scalable digital platforms across social technology, education systems, and <span className="text-brand-cyan">automation ecosystems.</span>
                 </motion.p>
@@ -30,7 +30,7 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-xl md:text-3xl text-neutral-400 max-w-4xl leading-relaxed mx-auto"
+                    className="text-lg sm:text-xl md:text-3xl text-neutral-400 max-w-4xl leading-relaxed mx-auto"
                 >
                     Our mission is to design and engineer digital systems that enable organizations to innovate faster, automate operations, and scale globally.
                 </motion.p>

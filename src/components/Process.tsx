@@ -45,16 +45,16 @@ const steps = [
 
 export default function Process() {
     return (
-        <section id="process" className="py-32 px-6 bg-brand-dark border-t border-brand-border text-white relative perspective-[1000px]">
+        <section id="process" className="py-20 sm:py-32 px-4 sm:px-6 bg-brand-dark border-t border-brand-border text-white relative perspective-[1000px]">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-20 flex flex-col items-center text-center max-w-4xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">Our process turns ideas into reliable, scalable digital platforms.</h2>
+                <div className="mb-12 sm:mb-20 flex flex-col items-center text-center max-w-4xl mx-auto">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6">Our process turns ideas into reliable, scalable digital platforms.</h2>
                     <p className="text-neutral-400 text-lg md:text-xl max-w-2xl">
                         A refined engineering process designed for speed, scale, and reliability.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-[1000px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 perspective-[1000px]">
                     {steps.map((step, index) => (
                         <motion.div
                             key={step.number}
@@ -66,7 +66,7 @@ export default function Process() {
                             className="flex flex-col h-full"
                         >
                             <TiltCard
-                                className="group relative p-10 h-full w-full rounded-[2rem] bg-brand-surface border border-brand-border hover:border-brand-cyan/40 shadow-xl shadow-black/40 overflow-hidden transition-colors"
+                                className="group relative p-7 sm:p-10 h-full w-full rounded-[1.5rem] sm:rounded-[2rem] bg-brand-surface border border-brand-border hover:border-brand-cyan/40 shadow-xl shadow-black/40 overflow-hidden transition-colors"
                             >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-brand-cyan/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-brand-cyan/10 transition-all translate-x-8 -translate-y-8" />
 

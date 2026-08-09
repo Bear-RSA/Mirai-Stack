@@ -17,9 +17,9 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="pt-20 pb-10 px-6 bg-brand-dark border-t border-brand-border">
+        <footer className="pt-14 sm:pt-20 pb-8 sm:pb-10 px-4 sm:px-6 bg-brand-dark border-t border-brand-border">
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 mb-12 sm:mb-16">
                     {/* Brand Column */}
                     <div className="md:col-span-5 lg:col-span-6 flex flex-col items-start">
                         <Link href="/" className="flex items-center gap-3 group mb-6">

@@ -18,6 +18,17 @@
   --color-brand-surface: #121826;
   --color-brand-surface-2: #1A2235;
   --color-brand-border: #1E293B;
+
+  --animate-scroll: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
 }
 
 body {

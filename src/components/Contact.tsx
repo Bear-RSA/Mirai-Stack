@@ -109,7 +109,7 @@ export default function Contact() {
     return (
         <section
             id="contact"
-            className="py-32 px-6 bg-brand-dark border-t border-brand-border text-white relative"
+            className="py-20 sm:py-32 px-4 sm:px-6 bg-brand-dark border-t border-brand-border text-white relative"
         >
             <div className="absolute left-0 bottom-0 w-[600px] h-[600px] bg-brand-cyan/5 blur-[120px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2" />
 
@@ -122,11 +122,11 @@ export default function Contact() {
                                 <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse" />
                                 Available for New Projects
                             </div>
-                            <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-8">
+                            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 sm:mb-8">
                                 Let's build <br />
                                 <span className="text-neutral-500">the future.</span>
                             </h2>
-                            <p className="text-xl text-neutral-400 max-w-md mb-12 leading-relaxed">
+                            <p className="text-lg sm:text-xl text-neutral-400 max-w-md mb-8 sm:mb-12 leading-relaxed">
                                 Whether you need a highly scalable SaaS platform, complex automation,
                                 or a dedicated engineering partner, our team is ready to deliver.
                             </p>
@@ -188,7 +188,7 @@ export default function Contact() {
                         >
                             <form
                                 onSubmit={handleSubmit}
-                                className="relative flex flex-col gap-6 bg-brand-surface/95 backdrop-blur-3xl p-10 md:p-14 rounded-[2.5rem] h-full overflow-hidden"
+                                className="relative flex flex-col gap-5 sm:gap-6 bg-brand-surface/95 backdrop-blur-3xl p-6 sm:p-10 md:p-14 rounded-[1.5rem] sm:rounded-[2.5rem] h-full overflow-hidden"
                             >
                                 <input
                                     type="text"

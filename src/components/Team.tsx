@@ -70,11 +70,11 @@ const TiltCard = ({ member, onClick }: { member: TeamMember; onClick: () => void
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onClick={onClick}
-            className="relative flex flex-col bg-brand-surface rounded-[2rem] overflow-hidden border border-brand-border shadow-2xl shadow-black/50 group cursor-pointer transition-shadow hover:shadow-brand-cyan/20 w-full"
+            className="relative flex flex-col bg-brand-surface rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-border shadow-2xl shadow-black/50 group cursor-pointer transition-shadow hover:shadow-brand-cyan/20 w-full"
         >
             <div
                 style={{ transform: "translateZ(30px)" }}
-                className="relative h-72 w-full overflow-hidden shrink-0"
+                className="relative h-56 sm:h-72 w-full overflow-hidden shrink-0"
             >
                 <Image
                     src={member.image}
@@ -83,8 +83,8 @@ const TiltCard = ({ member, onClick }: { member: TeamMember; onClick: () => void
                     className="object-cover object-center grayscale opacity-90 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent pointer-events-none" />
-                <div className="absolute bottom-6 left-8 right-8 z-10 transition-transform duration-300 group-hover:-translate-y-2">
-                    <h3 className="text-2xl font-bold text-white mb-1 drop-shadow-md">{member.name}</h3>
+                <div className="absolute bottom-4 sm:bottom-6 left-6 sm:left-8 right-6 sm:right-8 z-10 transition-transform duration-300 group-hover:-translate-y-2">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 drop-shadow-md">{member.name}</h3>
                     <p className="text-sm text-neutral-300 font-medium drop-shadow-md">
                         {member.role}
                     </p>
@@ -93,7 +93,7 @@ const TiltCard = ({ member, onClick }: { member: TeamMember; onClick: () => void
 
             <div
                 style={{ transform: "translateZ(20px)" }}
-                className="flex flex-col flex-grow p-8 bg-brand-surface"
+                className="flex flex-col flex-grow p-6 sm:p-8 bg-brand-surface"
             >
                 <p className="text-neutral-400 leading-relaxed text-[15px] line-clamp-4 mb-4">
                     {member.bio}
@@ -129,17 +129,17 @@ export default function Team() {
     return (
         <section
             id="team"
-            className={`py-32 px-6 bg-brand-dark border-t border-brand-border text-white perspective-[1000px] relative transition-all ${selectedMember ? 'z-[60]' : 'z-10'}`}
+            className={`py-20 sm:py-32 px-4 sm:px-6 bg-brand-dark border-t border-brand-border text-white perspective-[1000px] relative transition-all ${selectedMember ? 'z-[60]' : 'z-10'}`}
         >
             <div className="max-w-7xl mx-auto">
-                <div className="mb-20 flex flex-col items-center text-center max-w-3xl mx-auto">
-                    <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Leadership</h2>
+                <div className="mb-12 sm:mb-20 flex flex-col items-center text-center max-w-3xl mx-auto">
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-4 sm:mb-6">Leadership</h2>
                     <p className="text-neutral-400 max-w-2xl text-lg md:text-xl">
                         A founding team experienced in building, scaling, and optimizing digital systems.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 perspective-[1000px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 perspective-[1000px]">
                     {team.map((member, index) => (
                         <motion.div
                             key={member.name}
@@ -164,17 +164,17 @@ export default function Team() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setSelectedMember(null)}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-brand-dark/40 backdrop-blur-xl"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-brand-dark/40 backdrop-blur-xl overflow-y-auto"
                     >
                         <motion.div
                             initial={{ scale: 0.95, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.95, opacity: 0, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="flex flex-col md:flex-row max-w-5xl w-full h-auto md:h-[550px] gap-8 md:gap-12 justify-center items-center"
+                            className="flex flex-col md:flex-row max-w-5xl w-full h-auto max-h-[90vh] md:max-h-none md:h-[550px] gap-4 sm:gap-8 md:gap-12 justify-center items-center my-auto"
                         >
                             {/* Left Image Half */}
-                            <div className="w-full md:w-[380px] shrink-0 relative h-80 md:h-full bg-brand-surface rounded-[2rem] overflow-hidden shadow-2xl border border-brand-border">
+                            <div className="w-full md:w-[380px] shrink-0 relative h-52 sm:h-72 md:h-full bg-brand-surface rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-2xl border border-brand-border">
                                 <Image
                                     src={selectedMember.image}
                                     alt={selectedMember.name}
@@ -185,7 +185,7 @@ export default function Team() {
                             </div>
 
                             {/* Right Details Half */}
-                            <div className="w-full flex-1 max-w-[650px] bg-brand-surface p-10 md:p-12 rounded-[2rem] flex flex-col justify-between h-auto md:h-full border border-brand-border relative shadow-2xl">
+                            <div className="w-full flex-1 max-w-[650px] bg-brand-surface p-6 sm:p-10 md:p-12 rounded-[1.5rem] sm:rounded-[2rem] flex flex-col justify-between h-auto md:h-full border border-brand-border relative shadow-2xl overflow-y-auto">
                                 <button
                                     onClick={() => setSelectedMember(null)}
                                     className="absolute top-6 right-6 p-2 rounded-full bg-brand-surface-2 border border-brand-border text-neutral-400 hover:text-white hover:border-brand-cyan transition-colors"
@@ -195,13 +195,13 @@ export default function Team() {
 
                                 <div>
                                     <div className="w-12 h-1 bg-brand-blue mb-8 rounded-full" />
-                                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-2 pr-12">{selectedMember.name}</h2>
-                                    <p className="text-brand-cyan font-medium tracking-wider text-sm mb-8 uppercase">
+                                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight mb-2 pr-12">{selectedMember.name}</h2>
+                                    <p className="text-brand-cyan font-medium tracking-wider text-xs sm:text-sm mb-6 sm:mb-8 uppercase">
                                         {selectedMember.role}
                                     </p>
                                 </div>
 
-                                <p className="text-neutral-300 text-[16px] leading-relaxed mb-8 flex-1 overflow-y-auto custom-scrollbar pr-4 whitespace-pre-wrap">
+                                <p className="text-neutral-300 text-sm sm:text-[16px] leading-relaxed mb-6 sm:mb-8 flex-1 overflow-y-auto custom-scrollbar pr-2 sm:pr-4 whitespace-pre-wrap">
                                     {selectedMember.bio}
                                 </p>
 
