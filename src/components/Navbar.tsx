@@ -38,7 +38,7 @@ export default function Navbar() {
                     <Link href="/" className="text-base sm:text-xl font-bold tracking-tight text-white flex items-center gap-2 sm:gap-3 group w-full h-full min-w-0">
                         <div className="h-7 sm:h-8 relative flex items-center justify-center rounded-md overflow-hidden border border-brand-cyan/20 shadow-[0_0_15px_rgba(68,207,213,0.3)] group-hover:shadow-[0_0_25px_rgba(68,207,213,0.5)] transition-shadow shrink-0">
                             <Image
-                                src="/logo.jpg"
+                                src="/bimi-logo.svg"
                                 alt="Mirai Stack Logo"
                                 width={160}
                                 height={40}

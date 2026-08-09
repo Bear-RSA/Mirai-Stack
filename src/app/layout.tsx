@@ -50,7 +50,7 @@ const organizationSchema = {
     "@type": "Organization",
     name: "Mirai Stack",
     url: "https://miraistack.co.za",
-    logo: "https://miraistack.co.za/logo.jpg",
+    logo: "https://miraistack.co.za/bimi-logo.svg",
     description:
         "Software Engineering & Architecture Studio building scalable websites, platforms, and automation systems.",
 };
