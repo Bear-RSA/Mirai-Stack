@@ -15,6 +15,18 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        name: "FitSocial Waitlist",
+        slug: "fitsocial-waitlist",
+        category: "website",
+        href: "https://www.fitsocial.co.za/",
+        type: "Beta Waitlist Landing Page",
+        description: "A premium, Next.js-powered beta waitlist for FitSocial, a pre-launch fitness social platform by MiraiStack. Features a hybrid dual-API architecture using Web3Forms for data collection and Resend for automated transactional emails.",
+        stack: ["Next.js", "Tailwind CSS", "Web3Forms", "Resend"],
+        color: "bg-indigo-500/20",
+        year: "2025",
+        status: "Live",
+    },
+    {
         name: "Perspective Visuals",
         slug: "perspective-visuals",
         category: "website",
@@ -35,6 +47,18 @@ export const projects: Project[] = [
         description: "Official website and donation platform for SITHELO NPO (Sivusa Ithemba Lembokodo), dedicated to empowering women, youth, and children in Durban, South Africa.",
         stack: ["React", "Node.js"],
         color: "bg-emerald-500/20",
+        year: "2025",
+        status: "Live",
+    },
+    {
+        name: "OrbitOS",
+        slug: "orbitos",
+        category: "saas",
+        href: "https://www.orbit-os.co.za/",
+        type: "Workspace & Ops Console",
+        description: "OrbitOS is a Next.js 15 + Firebase SaaS — a workspace/ops console for small digital studios and agencies, priced in rand and sold to South African teams.",
+        stack: ["Next.js 15", "Firebase", "TypeScript", "Tailwind CSS"],
+        color: "bg-brand-cyan/20",
         year: "2025",
         status: "Live",
     },
