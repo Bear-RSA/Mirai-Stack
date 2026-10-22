@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import TiltCard from "./TiltCard";
+import { EASE_OUT } from "@/lib/motion";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,7 @@ export default function Navbar() {
 
     return (
         <header
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+            className={`fixed top-0 w-full z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${isScrolled
                 ? "bg-brand-dark/80 backdrop-blur-md border-b border-brand-border"
                 : "bg-transparent"
                 }`}
@@ -64,7 +65,7 @@ export default function Navbar() {
                     <TiltCard className="perspective-[800px] shrink-0 inline-block">
                         <Link
                             href="/#contact"
-                            className="px-6 py-2.5 text-sm font-medium bg-brand-cyan text-brand-dark rounded-full hover:bg-white hover:text-black transition-all shadow-lg hover:shadow-brand-cyan/20 block"
+                            className="px-6 py-2.5 text-sm font-medium bg-brand-cyan text-brand-dark rounded-full hover:bg-white hover:text-black transition-[background-color,color,box-shadow] shadow-lg hover:shadow-brand-cyan/20 block"
                         >
                             Contact
                         </Link>
@@ -85,9 +86,11 @@ export default function Navbar() {
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
+                        initial={{ opacity: 0, transform: "translateY(-8px)" }}
+                        animate={{ opacity: 1, transform: "translateY(0px)" }}
+                        exit={{ opacity: 0, transform: "translateY(-8px)", transition: { duration: 0.15, ease: EASE_OUT } }}
+                        transition={{ duration: 0.2, ease: EASE_OUT }}
+                        style={{ transformOrigin: "top" }}
                         className="md:hidden bg-brand-surface/95 backdrop-blur-xl border-b border-brand-border px-5 py-5 flex flex-col gap-1 shadow-2xl absolute w-full"
                     >
                         {navLinks.map((link) => (
@@ -103,7 +106,7 @@ export default function Navbar() {
                         <Link
                             href="/#contact"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="mt-3 w-full text-center px-4 py-3.5 text-base font-semibold bg-brand-cyan text-brand-dark rounded-xl hover:bg-white transition-all"
+                            className="mt-3 w-full text-center px-4 py-3.5 text-base font-semibold bg-brand-cyan text-brand-dark rounded-xl hover:bg-white active:scale-[0.98] transition-[background-color,transform] duration-150"
                         >
                             Contact
                         </Link>

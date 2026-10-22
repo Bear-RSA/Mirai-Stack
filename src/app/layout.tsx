@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CursorAmbience from "@/components/CursorAmbience";
+import MotionProvider from "@/components/MotionProvider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -69,10 +70,12 @@ export default function RootLayout({
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
                 />
-                <CursorAmbience />
-                <Navbar />
-                {children}
-                <Footer />
+                <MotionProvider>
+                    <CursorAmbience />
+                    <Navbar />
+                    {children}
+                    <Footer />
+                </MotionProvider>
             </body>
         </html>
     );

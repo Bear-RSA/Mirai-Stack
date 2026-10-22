@@ -20,6 +20,14 @@
   --color-brand-border: #1E293B;
 
   --animate-scroll: scroll 30s linear infinite;
+
+  /* Motion tokens. Built-in ease-out/ease-in-out are too weak for UI; these
+     override Tailwind's defaults so `ease-out` / `ease-in-out` and every
+     `transition-*` utility use the strong curves site-wide. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: var(--ease-out);
 }
 
 @keyframes scroll {
@@ -34,6 +42,16 @@
 html,
 body {
   overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-scroll {
+    animation: none;
+  }
 }
 
 body {

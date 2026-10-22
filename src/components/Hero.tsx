@@ -4,19 +4,17 @@ import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export default function Hero() {
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-        },
-    };
+import { EASE_OUT, reveal, staggerContainer } from "@/lib/motion";
 
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-    };
+// First-visit entrance: the one place the delight budget is spent, so it runs
+// a touch longer than the scroll reveals.
+const containerVariants = staggerContainer(0.08, 0.1);
+const itemVariants: Variants = {
+    ...reveal,
+    visible: { ...reveal.visible, transition: { duration: 0.6, ease: EASE_OUT } },
+};
+
+export default function Hero() {
 
     return (
         <section className="relative min-h-screen flex items-center justify-center pt-20 sm:pt-24 pb-10 sm:pb-12 overflow-hidden bg-grid text-white">
@@ -56,14 +54,14 @@ export default function Hero() {
                 >
                     <Link
                         href="/#projects"
-                        className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-brand-blue text-white font-medium rounded-full hover:scale-105 transition-all flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(33,138,205,0.4)] hover:shadow-[0_0_30px_rgba(33,138,205,0.6)] text-sm sm:text-base"
+                        className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-brand-blue text-white font-medium rounded-full hover:scale-[1.03] active:scale-[0.98] transition-[transform,box-shadow] duration-150 flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(33,138,205,0.4)] hover:shadow-[0_0_30px_rgba(33,138,205,0.6)] text-sm sm:text-base"
                     >
                         View Our Projects
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                     <Link
                         href="/#contact"
-                        className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-transparent border border-neutral-600 text-white hover:border-brand-cyan hover:text-brand-cyan font-medium rounded-full hover:scale-105 transition-all flex items-center justify-center bg-brand-surface/30 backdrop-blur-sm text-sm sm:text-base"
+                        className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-transparent border border-neutral-600 text-white hover:border-brand-cyan hover:text-brand-cyan font-medium rounded-full hover:scale-[1.03] active:scale-[0.98] transition-[transform,color,border-color] duration-150 flex items-center justify-center bg-brand-surface/30 backdrop-blur-sm text-sm sm:text-base"
                     >
                         Start a Project
                     </Link>

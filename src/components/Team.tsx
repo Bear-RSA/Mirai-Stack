@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useState, MouseEvent } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Mail, X, ArrowRight } from "lucide-react";
+
+import { EASE_OUT } from "@/lib/motion";
+import TiltCard from "./TiltCard";
+import Reveal, { RevealGroup, RevealItem } from "./Reveal";
 
 interface TeamMember {
     name: string;
@@ -28,63 +32,28 @@ const team: TeamMember[] = [
     },
 ];
 
-const TiltCard = ({ member, onClick }: { member: TeamMember; onClick: () => void }) => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
+const MemberCard = ({ member, onClick }: { member: TeamMember; onClick: () => void }) => (
+    <TiltCard
+        onClick={onClick}
+        className="relative flex flex-col bg-brand-surface rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-border shadow-xl shadow-black/20 group cursor-pointer transition-[border-color,box-shadow] hover:border-brand-cyan/50 hover:shadow-brand-cyan/10 w-full h-full p-6 sm:p-8 md:p-10"
+    >
+        <div className="mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-brand-cyan transition-colors">{member.name}</h3>
+            <p className="text-neutral-400 text-sm md:text-sm font-semibold tracking-widest uppercase">
+                {member.role}
+            </p>
+        </div>
 
-    const mouseXSpring = useSpring(x);
-    const mouseYSpring = useSpring(y);
-
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
-
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            onClick={onClick}
-            className="relative flex flex-col bg-brand-surface rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-border shadow-xl shadow-black/20 group cursor-pointer transition-all hover:border-brand-cyan/50 hover:shadow-brand-cyan/10 w-full h-full p-6 sm:p-8 md:p-10"
-        >
-            <div style={{ transform: "translateZ(30px)" }} className="mb-8">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-brand-cyan transition-colors">{member.name}</h3>
-                <p className="text-neutral-400 text-sm md:text-sm font-semibold tracking-widest uppercase">
-                    {member.role}
-                </p>
+        <div className="flex flex-col flex-grow">
+            <p className="text-neutral-300 leading-relaxed text-[15px] line-clamp-4 mb-8">
+                {member.bio}
+            </p>
+            <div className="mt-auto text-brand-cyan text-sm font-medium tracking-wide uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                Read full profile <ArrowRight size={14} />
             </div>
-
-            <div style={{ transform: "translateZ(20px)" }} className="flex flex-col flex-grow">
-                <p className="text-neutral-300 leading-relaxed text-[15px] line-clamp-4 mb-8">
-                    {member.bio}
-                </p>
-                <div className="mt-auto text-brand-cyan text-sm font-medium tracking-wide uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Read full profile <ArrowRight size={14} />
-                </div>
-            </div>
-        </motion.div>
-    );
-};
+        </div>
+    </TiltCard>
+);
 
 export default function Team() {
     const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
@@ -108,31 +77,27 @@ export default function Team() {
     return (
         <section
             id="team"
-            className={`py-20 sm:py-32 px-4 sm:px-6 bg-brand-dark border-t border-brand-border text-white perspective-[1000px] relative transition-all ${selectedMember ? 'z-[60]' : 'z-10'}`}
+            className={`py-20 sm:py-32 px-4 sm:px-6 bg-brand-dark border-t border-brand-border text-white perspective-[1000px] relative ${selectedMember ? 'z-[60]' : 'z-10'}`}
         >
             <div className="max-w-7xl mx-auto">
-                <div className="mb-12 sm:mb-24 flex flex-col items-center text-center max-w-3xl mx-auto">
+                <Reveal className="mb-12 sm:mb-24 flex flex-col items-center text-center max-w-3xl mx-auto">
                     <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-4 sm:mb-6">Leadership</h2>
                     <p className="text-neutral-400 max-w-2xl text-lg md:text-xl">
                         A founding team experienced in building, scaling, and optimizing digital systems.
                     </p>
-                </div>
+                </Reveal>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 perspective-[1000px]">
-                    {team.map((member, index) => (
-                        <motion.div
+                <RevealGroup className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 perspective-[1000px]">
+                    {team.map((member) => (
+                        <RevealItem
                             key={member.name}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
                             className="flex justify-center h-full"
                             style={{ perspective: 1000 }}
                         >
-                            <TiltCard member={member} onClick={() => setSelectedMember(member)} />
-                        </motion.div>
+                            <MemberCard member={member} onClick={() => setSelectedMember(member)} />
+                        </RevealItem>
                     ))}
-                </div>
+                </RevealGroup>
             </div>
 
             <AnimatePresence>
@@ -140,14 +105,19 @@ export default function Team() {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        exit={{ opacity: 0, transition: { duration: 0.15, ease: EASE_OUT } }}
+                        transition={{ duration: 0.2, ease: EASE_OUT }}
                         onClick={() => setSelectedMember(null)}
                         className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-brand-dark/60 backdrop-blur-md overflow-y-auto"
                     >
                         <motion.div
-                            initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, transform: "translateY(12px) scale(0.96)" }}
+                            animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
+                            exit={{ opacity: 0, transform: "translateY(12px) scale(0.96)", transition: { duration: 0.15, ease: EASE_OUT } }}
+                            transition={{ duration: 0.25, ease: EASE_OUT }}
+                            role="dialog"
+                            aria-modal="true"
+                            aria-label={selectedMember.name}
                             onClick={(e) => e.stopPropagation()}
                             className="flex flex-col max-w-3xl w-full max-h-[85vh] bg-brand-surface p-6 sm:p-8 md:p-14 rounded-[1.5rem] sm:rounded-[2rem] border border-brand-border relative shadow-2xl overflow-hidden"
                         >
@@ -176,7 +146,7 @@ export default function Team() {
                                 <div className="flex items-center gap-4 pt-8 border-t border-brand-border/50 mt-auto shrink-0">
                                     <a
                                         href={`mailto:partnerships@miraistack.co.za`}
-                                        className="w-12 h-12 rounded-full border border-brand-border flex items-center justify-center text-neutral-400 hover:text-brand-dark hover:bg-brand-cyan hover:border-brand-cyan transition-all"
+                                        className="w-12 h-12 rounded-full border border-brand-border flex items-center justify-center text-neutral-400 hover:text-brand-dark hover:bg-brand-cyan hover:border-brand-cyan transition-colors"
                                     >
                                         <Mail size={20} />
                                     </a>

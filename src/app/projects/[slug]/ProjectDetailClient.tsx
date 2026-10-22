@@ -6,27 +6,18 @@ import Link from "next/link";
 
 import type { Project } from "@/data/projects";
 import { categoryLabels } from "@/data/projects";
+import { reveal, revealTransition, staggerContainer } from "@/lib/motion";
+import Reveal from "@/components/Reveal";
 
 interface ProjectDetailClientProps {
     project: Project;
 }
 
 export default function ProjectDetailClient({ project }: ProjectDetailClientProps) {
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.08, delayChildren: 0.15 },
-        },
-    };
-
+    const containerVariants = staggerContainer(0.08, 0.1);
     const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.6, ease: "easeOut" },
-        },
+        ...reveal,
+        visible: { ...reveal.visible, transition: revealTransition },
     };
 
     return (
@@ -108,13 +99,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
             {/* Details Section */}
             <section className="px-6 pb-20">
                 <div className="max-w-5xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="grid grid-cols-1 md:grid-cols-3 gap-6"
-                    >
+                    <Reveal className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {/* Tech Stack */}
                         <div className="md:col-span-2 p-8 rounded-2xl bg-brand-surface border border-brand-border">
                             <div className="flex items-center gap-3 mb-6">
@@ -170,19 +155,14 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </Reveal>
                 </div>
             </section>
 
             {/* CTA Section */}
             <section className="px-6 pb-32">
                 <div className="max-w-5xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="relative p-12 md:p-16 rounded-3xl bg-brand-surface border border-brand-border overflow-hidden text-center"
+                    <Reveal className="relative p-12 md:p-16 rounded-3xl bg-brand-surface border border-brand-border overflow-hidden text-center"
                     >
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-brand-blue/10 blur-[100px] rounded-full pointer-events-none" />
 
@@ -196,20 +176,20 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <Link
                                     href="/#contact"
-                                    className="px-8 py-4 bg-brand-cyan text-brand-dark font-semibold rounded-full hover:bg-white transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-brand-cyan/20"
+                                    className="px-8 py-4 bg-brand-cyan text-brand-dark font-semibold rounded-full hover:bg-white active:scale-[0.98] transition-[background-color,box-shadow,transform] duration-150 flex items-center gap-2 shadow-lg hover:shadow-brand-cyan/20"
                                 >
                                     Start a Conversation
                                     <ArrowUpRight size={18} />
                                 </Link>
                                 <Link
                                     href="/projects"
-                                    className="px-8 py-4 bg-transparent border border-neutral-600 text-white hover:border-brand-cyan hover:text-brand-cyan font-medium rounded-full transition-all duration-300"
+                                    className="px-8 py-4 bg-transparent border border-neutral-600 text-white hover:border-brand-cyan hover:text-brand-cyan font-medium rounded-full transition-colors duration-150"
                                 >
                                     View All Projects
                                 </Link>
                             </div>
                         </div>
-                    </motion.div>
+                    </Reveal>
                 </div>
             </section>
         </main>

@@ -1,8 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Github, Mail, MapPin, ArrowRight } from "lucide-react";
+
+import { EASE_OUT } from "@/lib/motion";
 import TiltCard from "./TiltCard";
+import Reveal from "./Reveal";
 
 type ApiResponse =
     | { success: true; message?: string }
@@ -116,7 +120,7 @@ export default function Contact() {
             <div className="max-w-7xl mx-auto relative z-10">
                 <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
                     {/* Left: Contact Info */}
-                    <div className="lg:w-5/12 flex flex-col justify-between">
+                    <Reveal className="lg:w-5/12 flex flex-col justify-between">
                         <div>
                             <div className="inline-flex items-center gap-3 px-4 py-2 bg-brand-surface border border-brand-border rounded-full text-brand-cyan text-sm font-semibold tracking-wide uppercase mb-8 shadow-sm">
                                 <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse" />
@@ -137,7 +141,7 @@ export default function Contact() {
                             <div className="flex flex-col gap-6">
                                 <a
                                     href="mailto:info@miraistack.co.za"
-                                    className="group flex items-center gap-6 p-4 rounded-2xl hover:bg-brand-surface border border-transparent hover:border-brand-border transition-all w-full"
+                                    className="group flex items-center gap-6 p-4 rounded-2xl hover:bg-brand-surface border border-transparent hover:border-brand-border transition-colors w-full"
                                 >
                                     <div className="w-14 h-14 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center text-neutral-400 group-hover:bg-brand-cyan group-hover:text-brand-dark group-hover:border-brand-cyan transition-colors">
                                         <Mail size={22} />
@@ -152,7 +156,7 @@ export default function Contact() {
                                     </div>
                                 </a>
 
-                                <div className="group flex items-center gap-6 p-4 rounded-2xl hover:bg-brand-surface border border-transparent hover:border-brand-border transition-all w-full">
+                                <div className="group flex items-center gap-6 p-4 rounded-2xl hover:bg-brand-surface border border-transparent hover:border-brand-border transition-colors w-full">
                                     <div className="w-14 h-14 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center text-neutral-400 group-hover:bg-brand-cyan group-hover:text-brand-dark group-hover:border-brand-cyan transition-colors">
                                         <MapPin size={22} />
                                     </div>
@@ -172,16 +176,16 @@ export default function Contact() {
                                     href="https://github.com/miraistack"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="p-3 text-neutral-400 hover:text-white hover:bg-brand-surface border border-transparent hover:border-brand-border rounded-xl transition-all"
+                                    className="p-3 text-neutral-400 hover:text-white hover:bg-brand-surface border border-transparent hover:border-brand-border rounded-xl transition-colors"
                                 >
                                     <Github size={22} />
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </Reveal>
 
                     {/* Right: Form */}
-                    <div className="lg:w-7/12 perspective-[1000px]">
+                    <Reveal delay={0.1} className="lg:w-7/12 perspective-[1000px]">
                         <TiltCard
                             tiltIntensity={5}
                             className="p-[1px] rounded-[2.5rem] bg-gradient-to-br from-brand-border/80 via-transparent to-brand-border/30 h-full overflow-hidden shadow-2xl shadow-black/80"
@@ -223,7 +227,7 @@ export default function Contact() {
                                             name="name"
                                             required
                                             placeholder="Bear McCoy"
-                                            className="w-full bg-brand-dark/50 border border-brand-border rounded-xl px-5 py-4 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-all"
+                                            className="w-full bg-brand-dark/50 border border-brand-border rounded-xl px-5 py-4 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-[border-color,box-shadow] duration-150"
                                         />
                                     </div>
                                     <div className="flex flex-col gap-2 w-full">
@@ -238,7 +242,7 @@ export default function Contact() {
                                             id="company"
                                             name="company"
                                             placeholder="Acme Corp"
-                                            className="w-full bg-brand-dark/50 border border-brand-border rounded-xl px-5 py-4 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-all"
+                                            className="w-full bg-brand-dark/50 border border-brand-border rounded-xl px-5 py-4 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-[border-color,box-shadow] duration-150"
                                         />
                                     </div>
                                 </div>
@@ -256,7 +260,7 @@ export default function Contact() {
                                         name="email"
                                         required
                                         placeholder="bear@company.com"
-                                        className="w-full bg-brand-dark/50 border border-brand-border rounded-xl px-5 py-4 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-all"
+                                        className="w-full bg-brand-dark/50 border border-brand-border rounded-xl px-5 py-4 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-[border-color,box-shadow] duration-150"
                                     />
                                 </div>
 
@@ -274,28 +278,38 @@ export default function Contact() {
                                         required
                                         minLength={10}
                                         placeholder="Tell us about your objectives, timeline, or technology stack..."
-                                        className="w-full bg-brand-dark/50 border border-brand-border rounded-xl px-5 py-4 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-all resize-none custom-scrollbar"
+                                        className="w-full bg-brand-dark/50 border border-brand-border rounded-xl px-5 py-4 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan transition-[border-color,box-shadow] duration-150 resize-none custom-scrollbar"
                                     />
                                 </div>
 
-                                {status === "success" && (
-                                    <div className="p-4 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan relative z-10">
-                                        <p className="text-sm font-medium leading-relaxed">
-                                            ✓ Message sent. We’ll get back to you shortly.
-                                        </p>
-                                    </div>
-                                )}
-
-                                {status === "error" && (
-                                    <div className="p-4 rounded-xl bg-red-400/10 border border-red-400/20 text-red-400 relative z-10">
-                                        <p className="text-sm font-medium leading-relaxed">{errorMessage}</p>
-                                    </div>
-                                )}
+                                <AnimatePresence initial={false}>
+                                    {status !== "idle" && (
+                                        <motion.div
+                                            key={status}
+                                            role="status"
+                                            initial={{ opacity: 0, transform: "translateY(8px)" }}
+                                            animate={{ opacity: 1, transform: "translateY(0px)" }}
+                                            exit={{ opacity: 0, transform: "translateY(8px)", transition: { duration: 0.15, ease: EASE_OUT } }}
+                                            transition={{ duration: 0.2, ease: EASE_OUT }}
+                                            className={`p-4 rounded-xl border relative z-10 ${
+                                                status === "success"
+                                                    ? "bg-brand-cyan/10 border-brand-cyan/20 text-brand-cyan"
+                                                    : "bg-red-400/10 border-red-400/20 text-red-400"
+                                            }`}
+                                        >
+                                            <p className="text-sm font-medium leading-relaxed">
+                                                {status === "success"
+                                                    ? "✓ Message sent. We’ll get back to you shortly."
+                                                    : errorMessage}
+                                            </p>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
 
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="group mt-auto w-full flex items-center justify-center gap-3 bg-white text-brand-dark hover:bg-brand-cyan font-bold text-lg rounded-xl py-5 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(68,207,213,0.3)] disabled:opacity-70 relative z-10"
+                                    className="group mt-auto w-full flex items-center justify-center gap-3 bg-white text-brand-dark hover:bg-brand-cyan font-bold text-lg rounded-xl py-5 active:scale-[0.98] transition-[background-color,box-shadow,transform,opacity] duration-150 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(68,207,213,0.3)] disabled:opacity-70 relative z-10"
                                 >
                                     {isSubmitting ? "Sending..." : "Submit Request"}
                                     {!isSubmitting && (
@@ -304,7 +318,7 @@ export default function Contact() {
                                 </button>
                             </form>
                         </TiltCard>
-                    </div>
+                    </Reveal>
                 </div>
             </div>
         </section>

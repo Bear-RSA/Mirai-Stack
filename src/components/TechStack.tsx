@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Reveal from "./Reveal";
 
 const technologies = [
     "Next.js",
@@ -22,9 +22,11 @@ export default function TechStack() {
             <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none" />
 
             <div className="max-w-7xl mx-auto flex flex-col items-center gap-6 sm:gap-10 relative z-0">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-neutral-400 text-center">
-                    Powered by modern infrastructure
-                </h2>
+                <Reveal>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-neutral-400 text-center">
+                        Powered by modern infrastructure
+                    </h2>
+                </Reveal>
 
                 <div className="w-full overflow-hidden">
                     <div className="flex animate-scroll whitespace-nowrap gap-4 sm:gap-6 py-4">

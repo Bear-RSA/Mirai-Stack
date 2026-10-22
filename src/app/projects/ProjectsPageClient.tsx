@@ -8,6 +8,7 @@ import Link from "next/link";
 import { projects, categoryLabels } from "@/data/projects";
 import type { ProjectCategory } from "@/data/projects";
 import TiltCard from "@/components/TiltCard";
+import { EASE_IN_OUT, EASE_OUT, reveal, revealTransition } from "@/lib/motion";
 
 type FilterOption = "all" | ProjectCategory;
 
@@ -49,9 +50,10 @@ export default function ProjectsPageClient() {
                     </Link>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        variants={reveal}
+                        initial="hidden"
+                        animate="visible"
+                        transition={revealTransition}
                     >
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
                             Our{" "}
@@ -70,9 +72,10 @@ export default function ProjectsPageClient() {
                 <div className="max-w-7xl mx-auto">
                     {/* Filter Tabs */}
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
+                        variants={reveal}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ ...revealTransition, delay: 0.1 }}
                         className="flex items-center gap-2 mb-16 p-1.5 bg-brand-surface/60 backdrop-blur-sm border border-brand-border rounded-full w-max"
                     >
                         {filterTabs.map((tab) => (
@@ -105,7 +108,7 @@ export default function ProjectsPageClient() {
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
+                        transition={{ duration: 0.3, delay: 0.2, ease: EASE_OUT }}
                         className="text-neutral-500 text-sm font-medium mb-10 tracking-wide uppercase"
                     >
                         {filtered.length} Project{filtered.length !== 1 ? "s" : ""}
@@ -129,6 +132,8 @@ export default function ProjectsPageClient() {
                                         transition={{
                                             duration: 0.4,
                                             delay: index * 0.06,
+                                            ease: EASE_OUT,
+                                            layout: { duration: 0.3, ease: EASE_IN_OUT },
                                         }}
                                         className={`flex flex-col h-full ${
                                             isLastAndOdd
@@ -145,7 +150,7 @@ export default function ProjectsPageClient() {
                                             <TiltCard className="group relative flex flex-col justify-between p-10 h-full w-full rounded-[2rem] bg-brand-surface border border-brand-border hover:border-brand-blue/40 overflow-hidden transition-colors duration-500">
                                                 {/* Accent glow */}
                                                 <div
-                                                    className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 opacity-20 transition-all duration-700 group-hover:opacity-60 group-hover:scale-110 ${project.color}`}
+                                                    className={`absolute top-0 right-0 w-80 h-80 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 opacity-20 transition-[opacity,transform] duration-700 group-hover:opacity-60 group-hover:scale-110 ${project.color}`}
                                                 />
 
                                                 <div className="relative z-10">
@@ -166,7 +171,7 @@ export default function ProjectsPageClient() {
                                                             {project.name}
                                                             {project.href && <ArrowUpRight size={20} className="text-neutral-500 group-hover:text-brand-cyan transition-colors" />}
                                                         </h3>
-                                                        <div className="w-12 h-12 rounded-full bg-brand-surface-2 border border-brand-border flex items-center justify-center text-neutral-400 group-hover:bg-brand-cyan group-hover:text-brand-dark group-hover:border-brand-cyan transition-all duration-500 group-hover:rotate-45 shrink-0 mt-1">
+                                                        <div className="w-12 h-12 rounded-full bg-brand-surface-2 border border-brand-border flex items-center justify-center text-neutral-400 group-hover:bg-brand-cyan group-hover:text-brand-dark group-hover:border-brand-cyan transition-[transform,background-color,color,border-color] duration-300 group-hover:rotate-45 shrink-0 mt-1">
                                                             <ArrowUpRight size={22} />
                                                         </div>
                                                     </div>
